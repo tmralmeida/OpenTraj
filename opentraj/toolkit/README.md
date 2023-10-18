@@ -45,14 +45,18 @@ conda create -n opentraj python=3 && conda activate opentraj
 ```
 
 # install dependencies
-cd [OpenTraj]
-pip install -r requirements.txt
+```
+cd opentraj && pip install -r requirements.txt
+```
 
 # install modules
+```
 pip install -e .
+```
 
 # run it!
-python -m opentraj.toolkit.indicators.crowd_density [data_dir] [output_dir]
-
+```
+python -m opentraj.toolkit.indicators.crowd_density [data_dir~datasets_folder] [output_dir]
+```
 
 
