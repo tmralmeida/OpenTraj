@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import glob
 import ast
-from toolkit.core.trajdataset import TrajDataset
+from opentraj.toolkit.core.trajdataset import TrajDataset
 
 
 #load LCAS data (two scenes in the rawdata: minerva & strands2, but only minerva is included here as strands2 data has some issues with repeated time)
@@ -15,7 +15,7 @@ def load_lcas(path, **kwargs):
     traj_dataset.title = "LCAS"
     minerva_files_list = glob.glob(path + "/minerva/**/data.csv")
     minerva_columns = ['frame_id','person_id','pos_x','pos_y','rot_z','rot_w','scene_id']
-   
+
     # read from minerva data.csv
     minerva_raw_dataset = []
     # This load data from all files
@@ -24,7 +24,7 @@ def load_lcas(path, **kwargs):
         minerva_raw_dataset.append(data)
     minerva_raw_dataset = pd.concat(minerva_raw_dataset)
     minerva_raw_dataset['scene_id'] = 'minerva'
-    
+
     minerva_raw_dataset.reset_index(inplace=True, drop=True)
 
     traj_dataset.title = kwargs.get('title', "LCAS")

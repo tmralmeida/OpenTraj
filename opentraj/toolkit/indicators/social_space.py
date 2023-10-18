@@ -9,8 +9,8 @@ from sklearn.metrics import euclidean_distances
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from toolkit.test.load_all import all_dataset_names, get_datasets, get_trajlets
-from toolkit.utils.histogram_sampler import histogram_sampler
+from opentraj.toolkit.test.load_all import all_dataset_names, get_datasets, get_trajlets
+from opentraj.toolkit.utils.histogram_sampler import histogram_sampler
 
 
 def social_space(dataset: pd.DataFrame):
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     soc_space_values = []
 
     # dataset_names = all_dataset_names
-    dataset_names = ['ETH-Univ', 'ETH-Hotel', 'SDD-coupa']   # test
+    dataset_names = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
 
     datasets = get_datasets(opentraj_root, dataset_names)
     for ds_name, ds in datasets.items():

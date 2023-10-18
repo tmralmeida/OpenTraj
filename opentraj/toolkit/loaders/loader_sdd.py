@@ -6,7 +6,7 @@ import glob
 from math import ceil
 import yaml
 import pandas as pd
-from toolkit.core.trajdataset import TrajDataset
+from opentraj.toolkit.core.trajdataset import TrajDataset
 
 
 def load_sdd(path, **kwargs):
@@ -71,7 +71,7 @@ def load_sdd_dir(path: str, **kwargs):
 
     fps = 30
     sampling_rate = kwargs.get('sampling_rate', 1)
-    use_kalman = kwargs.get('use_kalman', False)    
+    use_kalman = kwargs.get('use_kalman', False)
     traj_dataset.postprocess(fps=fps, sampling_rate=sampling_rate, use_kalman=use_kalman)
     return traj_dataset
 

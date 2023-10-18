@@ -4,7 +4,7 @@
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from toolkit.utils.kalman_smoother import KalmanModel
+from opentraj.toolkit.utils.kalman_smoother import KalmanModel
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
@@ -342,9 +342,8 @@ def merge_datasets(dataset_list, new_title=[]):
         return dataset_list[0]
 
     merged = dataset_list[0]
-
     for ii in range(1, len(dataset_list)):
-        merged.data = merged.data.append(dataset_list[ii].data)
+        merged.data = pd.concat([merged.data, pd.DataFrame(dataset_list[ii].data)], ignore_index=True)
         if dataset_list[ii].title != merged.title:
             merged.title = merged.title + " + " + dataset_list[ii].title
     if len(new_title):

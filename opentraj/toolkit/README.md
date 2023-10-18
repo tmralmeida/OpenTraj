@@ -38,22 +38,21 @@ We present indicators in 3 categories:
 
 
 ## Setup
-To set up the code and to run the benchmarking, run the following script:
+To set up the code and to run the benchmarking, run the following:
 
-```bash
-# create a virtualenv and activate it
-python3 -m venv env
-source env/bin/activate
+```
+conda create -n opentraj python=3 && conda activate opentraj
+```
 
 # install dependencies
 cd [OpenTraj]
-pip install -r benchmarking/requirements.txt
+pip install -r requirements.txt
+
+# install modules
+pip install -e .
 
 # run it!
-python toolkit/benchmarking . [output_dir]
+python -m opentraj.toolkit.indicators.crowd_density [data_dir] [output_dir]
 
-# exit the environment
-deactivate  # Exit virtual environment
-``` 
 
 

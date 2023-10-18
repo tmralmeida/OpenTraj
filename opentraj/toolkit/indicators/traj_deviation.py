@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import patches
 # matplotlib.use('PS')
-from toolkit.core.trajdataset import TrajDataset
+from opentraj.toolkit.core.trajdataset import TrajDataset
 
 
 def deviation_from_linear_pred(trajlets, save_plots_to):
@@ -118,13 +118,13 @@ def run(trajlets, output_dir):
 
 
 if __name__ == "__main__":
-    from toolkit.test.load_all import all_dataset_names, get_trajlets
+    from opentraj.toolkit.test.load_all import get_trajlets
 
     opentraj_root = sys.argv[1]
     output_dir = sys.argv[2]
 
     # dataset_names = ['KITTI']
-    dataset_names = ['ETH-Univ', 'ETH-Hotel', 'UCY-Zara', 'UCY-Univ']
+    dataset_names = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
     # dataset_names = all_dataset_names
     trajlets = get_trajlets(opentraj_root, dataset_names)
     run(trajlets, output_dir)

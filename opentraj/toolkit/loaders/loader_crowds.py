@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import scipy.interpolate
 
-from toolkit.core.trajdataset import TrajDataset
+from opentraj.toolkit.core.trajdataset import TrajDataset
 
 TrackRow = namedtuple('Row', ['frame', 'pedestrian', 'x', 'y', 'prediction_number', 'scene_id'])
 TrackRow.__new__.__defaults__ = (None, None, None, None, None, None)
@@ -23,7 +23,7 @@ class CrowdLoader:
 
     def to_world_coord(self, homog, loc):
         """Given H^-1 and world coordinates, returns (u, v) in image coordinates."""
-       
+
         locHomogenous = np.hstack((loc, np.ones((loc.shape[0], 1))))
         loc_tr = np.transpose(locHomogenous)
         loc_tr = np.matmul(homog, loc_tr)  # to camera frame
@@ -39,10 +39,10 @@ class CrowdLoader:
         ## https://github.com/agrimgupta92/sgan/issues/5
         # xs_ = np.array([x for x, _, _ in person_xyf]) * 0.0210
         # ys_ = np.array([y for _, y, _ in person_xyf]) * 0.0239
-        
+
         xys = self.to_world_coord(self.homog, np.array([[x, y] for x, y, _ in person_xyf]))
         xs, ys = xys[:, 0], xys[:, 1]
-        
+
         fs = np.array([f for _, _, f in person_xyf])
 
         kind = 'linear'
@@ -53,7 +53,7 @@ class CrowdLoader:
         y_fn = scipy.interpolate.interp1d(fs, ys, kind=kind)
 
         frames = np.arange(min(fs) // 10 * 10 + 10, max(fs), 10)
-     
+
         return [TrackRow(int(f), ped_id, x, y)
                 for x, y, f in np.stack([x_fn(frames), y_fn(frames), frames]).T]
 
@@ -63,7 +63,7 @@ class CrowdLoader:
 
             pedestrians = []
             current_pedestrian = []
-        
+
 
             for line in whole_file.split('\n'):
                 if '- Num of control points' in line or \
@@ -100,13 +100,13 @@ def load_crowds(path, **kwargs):
     homog_file = kwargs.get("homog_file", "")
     Homog = (np.loadtxt(homog_file)) if os.path.exists(homog_file) else np.eye(3)
     raw_dataset = pd.DataFrame()
-    
+
     data = CrowdLoader(Homog).load(path)
     raw_dataset["frame_id"] = [data[i].frame for i in range(len(data))]
     raw_dataset["agent_id"] = [data[i].pedestrian for i in range(len(data))]
     raw_dataset["pos_x"] = [data[i].x for i in range(len(data))]
     raw_dataset["pos_y"] = [data[i].y for i in range(len(data))]
-  
+
     traj_dataset = TrajDataset()
 
     traj_dataset.title = kwargs.get('title', "Crowds")

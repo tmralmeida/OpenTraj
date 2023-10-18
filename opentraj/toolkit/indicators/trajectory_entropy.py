@@ -4,15 +4,13 @@
 import os
 import sys
 import math
-import argparse
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from random import sample
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
-from toolkit.core.trajlet import split_trajectories
-from toolkit.test.load_all import all_dataset_names, get_trajlets
+from opentraj.toolkit.test.load_all import get_trajlets
 
 
 def Gauss_K(x, y, h):
@@ -199,7 +197,7 @@ def entropies_set(opentraj_root, datasets_name, M=30, replace=False):
 
 # --------------------------------Main--------------------------------------------
 def run(opentraj_root, output_dir):
-    datasets_name = all_dataset_names
+    datasets_name = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
     rep = True
     ntpys = entropies_set(opentraj_root, datasets_name, 30, replace=rep)
 
@@ -240,7 +238,6 @@ def run(opentraj_root, output_dir):
 
 
 if __name__ == '__main__':
-    from toolkit.benchmarking.load_all_datasets import get_datasets, get_trajlets, all_dataset_names
 
     opentraj_root = sys.argv[1]
     output_dir = sys.argv[2]

@@ -4,7 +4,7 @@ import os
 import sys
 import numpy as np
 import pandas as pd
-from toolkit.utils.histogram_sampler import normalize_samples_with_histogram
+from opentraj.toolkit.utils.histogram_sampler import normalize_samples_with_histogram
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -118,11 +118,11 @@ def run(trajlets, output_dir):
 
 
 if __name__ == "__main__":
-    from toolkit.test.load_all import all_dataset_names, get_datasets, get_trajlets
+    from opentraj.toolkit.test.load_all import all_dataset_names, get_datasets, get_trajlets
 
     opentraj_root = sys.argv[1]
     output_dir = sys.argv[2]
-
+    all_dataset_names = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
     all_datasets = get_datasets(opentraj_root, all_dataset_names)
     all_trajlets = get_trajlets(opentraj_root, all_dataset_names)
 
