@@ -7,6 +7,5 @@ PyYAML
 scikit-learn
 scipy
 seaborn
-sklearn
 sympy
 tqdm
