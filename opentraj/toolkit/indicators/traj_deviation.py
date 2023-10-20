@@ -124,7 +124,17 @@ if __name__ == "__main__":
     output_dir = sys.argv[2]
 
     # dataset_names = ['KITTI']
-    dataset_names = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
+    dataset_names = [
+        "ETH-Univ",
+        "ETH-Hotel",
+        "UCY-Univ",
+        "UCY-Zara1",
+        "UCY-Zara2",
+        "ind-1",
+        "ind-2",
+        "ind-3",
+        "ind-4",
+    ]
     # dataset_names = all_dataset_names
     trajlets = get_trajlets(opentraj_root, dataset_names)
     run(trajlets, output_dir)

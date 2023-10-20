@@ -85,7 +85,17 @@ def global_density(all_frames, area):
 
 
 def run(datasets, output_dir):
-    all_names = ["ETH-Univ", "ETH-Hotel", "UCY-Univ", "UCY-Zara1", "UCY-Zara2"]
+    all_names = [
+        "ETH-Univ",
+        "ETH-Hotel",
+        "UCY-Univ",
+        "UCY-Zara1",
+        "UCY-Zara2",
+        "ind-1",
+        "ind-2",
+        "ind-3",
+        "ind-4",
+    ]
 
     # list(datasets.keys())
 
@@ -316,7 +326,17 @@ def run(datasets, output_dir):
 if __name__ == "__main__":
     opentraj_root = sys.argv[1]
     output_dir = sys.argv[2]
-    dataset_names = ["ETH-Univ", "ETH-Hotel", "UCY-Univ", "UCY-Zara1", "UCY-Zara2"]
+    dataset_names = [
+        "ETH-Univ",
+        "ETH-Hotel",
+        "UCY-Univ",
+        "UCY-Zara1",
+        "UCY-Zara2",
+        "ind-1",
+        "ind-2",
+        "ind-3",
+        "ind-4",
+    ]
     datasets = get_datasets(opentraj_root, dataset_names)
 
     run(datasets, output_dir)

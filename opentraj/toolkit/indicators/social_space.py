@@ -73,7 +73,17 @@ if __name__ == "__main__":
     soc_space_values = []
 
     # dataset_names = all_dataset_names
-    dataset_names = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
+    dataset_names = [
+        "ETH-Univ",
+        "ETH-Hotel",
+        "UCY-Univ",
+        "UCY-Zara1",
+        "UCY-Zara2",
+        "ind-1",
+        "ind-2",
+        "ind-3",
+        "ind-4",
+    ]
 
     datasets = get_datasets(opentraj_root, dataset_names)
     for ds_name, ds in datasets.items():

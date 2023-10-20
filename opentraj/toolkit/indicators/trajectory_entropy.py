@@ -197,7 +197,17 @@ def entropies_set(opentraj_root, datasets_name, M=30, replace=False):
 
 # --------------------------------Main--------------------------------------------
 def run(opentraj_root, output_dir):
-    datasets_name = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
+    datasets_name = [
+        "ETH-Univ",
+        "ETH-Hotel",
+        "UCY-Univ",
+        "UCY-Zara1",
+        "UCY-Zara2",
+        "ind-1",
+        "ind-2",
+        "ind-3",
+        "ind-4",
+    ]
     rep = True
     ntpys = entropies_set(opentraj_root, datasets_name, 30, replace=rep)
 

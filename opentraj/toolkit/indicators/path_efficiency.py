@@ -11,18 +11,20 @@ from opentraj.toolkit.utils.histogram_sampler import normalize_samples_with_hist
 
 
 def path_length(trajectory: pd.DataFrame):
-    traj_poss = trajectory[['pos_x', 'pos_y']].diff().dropna()
+    traj_poss = trajectory[["pos_x", "pos_y"]].diff().dropna()
     travelled_distance = np.linalg.norm(traj_poss, axis=1).sum()
     return travelled_distance
 
 
 def path_efficiency(trajectory: pd.DataFrame):
     """
-     ratio of distance between the endpoints of a segment
-     over actual length of the trajectory
+    ratio of distance between the endpoints of a segment
+    over actual length of the trajectory
     """
     actual_length = path_length(trajectory)
-    end2end_dist = np.linalg.norm(np.diff(trajectory[['pos_x', 'pos_y']].iloc[[0, -1]], axis=0))
+    end2end_dist = np.linalg.norm(
+        np.diff(trajectory[["pos_x", "pos_y"]].iloc[[0, -1]], axis=0)
+    )
     return end2end_dist / actual_length
 
 
@@ -46,11 +48,20 @@ def run(trajlets, output_dir):
     for ds_name, ds in trajlets.items():
         path_eff_ind = path_efficiency_index(ds) * 100
         path_eff_values.append(path_eff_ind)
-    path_eff_values = normalize_samples_with_histogram(path_eff_values, max_n_samples=800, n_bins=100,
-                                                       quantile_interval=[0.1, 1])
-    df_path_eff = pd.concat([pd.DataFrame({'title': dataset_names[ii],
-                                           'path_eff': path_eff_values[ii],
-                                           }) for ii in range(len(dataset_names))])
+    path_eff_values = normalize_samples_with_histogram(
+        path_eff_values, max_n_samples=800, n_bins=100, quantile_interval=[0.1, 1]
+    )
+    df_path_eff = pd.concat(
+        [
+            pd.DataFrame(
+                {
+                    "title": dataset_names[ii],
+                    "path_eff": path_eff_values[ii],
+                }
+            )
+            for ii in range(len(dataset_names))
+        ]
+    )
 
     print("making path eff plots ...")
 
@@ -58,30 +69,40 @@ def run(trajlets, output_dir):
     fig = plt.figure(figsize=(12, 1.6))
 
     ax1 = fig.add_subplot(111)
-    sns.swarmplot(y='path_eff', x='title', data=df_path_eff, size=1)
+    sns.swarmplot(y="path_eff", x="title", data=df_path_eff, size=1)
     plt.ylim([90, 100])
-    plt.xlabel('')
+    plt.xlabel("")
     # plt.xticks([])
     # ax1.set_yticks([0, 0.5, 1, 1.5, 2.])
-    plt.ylabel('Path Efficiency (%)')
+    plt.ylabel("Path Efficiency (%)")
     plt.xticks(rotation=-20)
     ax1.yaxis.label.set_size(9)
     ax1.xaxis.set_tick_params(labelsize=8)
     ax1.yaxis.set_tick_params(labelsize=8)
 
-    plt.savefig(os.path.join(output_dir, 'path_eff.pdf'), dpi=500, bbox_inches='tight')
+    plt.savefig(os.path.join(output_dir, "path_eff.pdf"), dpi=500, bbox_inches="tight")
 
     plt.show()
 
 
 if __name__ == "__main__":
     import sys
-    from opentraj.toolkit.test.load_all import all_dataset_names, get_trajlets
+    from opentraj.toolkit.test.load_all import get_trajlets
 
     opentraj_root = sys.argv[1]
     output_dir = sys.argv[2]
 
-    dataset_names = ['ETH-Univ', 'ETH-Hotel', 'UCY-Univ', 'UCY-Zara1', 'UCY-Zara2']
+    dataset_names = [
+        "ETH-Univ",
+        "ETH-Hotel",
+        "UCY-Univ",
+        "UCY-Zara1",
+        "UCY-Zara2",
+        "ind-1",
+        "ind-2",
+        "ind-3",
+        "ind-4",
+    ]
     # dataset_names = all_dataset_names
     trajlets = get_trajlets(opentraj_root, dataset_names)
 

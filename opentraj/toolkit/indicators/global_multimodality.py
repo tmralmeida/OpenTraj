@@ -452,7 +452,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Dataset names
-    dataset_names = ["ETH-Univ", "ETH-Hotel", "UCY-Univ", "UCY-Zara1", "UCY-Zara2"]
+    dataset_names = [
+        "ETH-Univ",
+        "ETH-Hotel",
+        "UCY-Univ",
+        "UCY-Zara1",
+        "UCY-Zara2",
+        "ind-1",
+        "ind-2",
+        "ind-3",
+        "ind-4",
+    ]
 
     # Get trajectories
     trajlets = get_trajlets(args.opentraj_root, dataset_names)
